@@ -18,7 +18,8 @@ $pazinojums='';
 if(isset($_POST['Pers_kods'],$_POST['autorizeties'])){
 	foreach($lietotaji as $lietotajs){
 		//vai pareizi pieejas dati	
-		if(md5('f^89#hJ!'.md5($_POST['Pers_kods']))==$lietotajs['Pers_kods']){
+		//if(md5('f^89#hJ!'.md5($_POST['Pers_kods']))==$lietotajs['Pers_kods']){
+		if($_POST['Pers_kods']==$lietotajs['Pers_kods']){
 			$_SESSION['autorizejies']=1;		
 			$_SESSION['id']=$lietotajs['id'];			
 			//setcookie('autorizejies',1,time()+60*60);
@@ -68,7 +69,7 @@ if(isset($_GET['sadala'])){
 	foreach($sadalas as $sadala){
 		if($_GET['sadala']==$sadala['adrese']){
 			if(($sadala['redzams']=='autorizetiem' && AUTORIZEJIES==0) || ($sadala['redzams']=='neautorizetiem' && AUTORIZEJIES==1)){
-				header("Location: sing_up_page.php");
+				header("Location: sign_up_page.php");
 			} else {
 				include 'sub/'.$_GET['sadala'].'.php';
 			}

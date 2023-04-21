@@ -36,6 +36,7 @@ Aplūkojot savus reģistrācijas datus tiek izvadīta šāda informācija:
 3.) Parasts echo h1 header [Ja ir laika, pievienot funkciju, kas parāda lietotājam, vai tiks budžetā]
 4.) Tas pats, kas 2. solī
 5.) Reģistrējoties, tiks aprēķināts jau ranga numurs (parasti if-i)
+5.1) Jāvadās pēc 2004-2011 gada līmeņiem (because he's milenial): https://www.visc.gov.lv/lv/valsts-valodas-prasmes-limeni
 5.2) Jāatrod SQL teikumu, kurā tiek sortots pēc viena main value (vērtējumu) ar pārbaudi, kas sakārto arī pēc vērtējuma, ja rangs ir vienāds ar citiem lietotājiem.
 
 
