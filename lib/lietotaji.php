@@ -75,7 +75,7 @@ else{
 			<br />
 			<button name="pievienot">Pievienot</button>
 		</p>
-	</form>';
+	</form>';	
 	
 	//Saraksta skata izvade
 	$lietotaji=db::query("SELECT * FROM lietotaji");
