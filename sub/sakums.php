@@ -241,11 +241,6 @@ echo '
 
     </script>';
 
-    // Kaut kā vajag dabūt, lai tas stulbai $_POST strādā... Salīdzinu to ar klasē darīto. Nesaprotu, kā tas nostrādāja, kā vajag.
-    // Tu tak redzi failos .lib (folderis) un test5.php failus, ne?
-    // Nav... ātri commit + push githubā
-    
-    //  Ne, man kkas jauzspiez, lai kipa refreshotu? ok
     if(isset($_POST['CE_V1']) && isset($_POST['CE_V2']) && isset($_POST['Iesniegt'])){
         echo '<p>Rangs ir: '.$rangs.'</p>';
     }
