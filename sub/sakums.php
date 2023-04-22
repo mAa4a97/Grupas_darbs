@@ -1,6 +1,54 @@
 <!-- sakums.php == reg.php -->
 <?php
 
+# Tiek izveidots profils !!!!!!!!!!!!! NESTRĀDĀ VĒL !!!!!!!!!!!!
+if(isset($_POST['Vards'],$_POST['Uzvards'],$_POST['Pers_kods'],$_POST['studiju_programma'],$_POST['CE_P1'],$_POST['CE_V1'],$_POST['CE_P2'],$_POST['CE_V2'],$_POST['Vid'],$_POST['Iesniegt']) && !empty($_POST['Vards']) && !empty($_POST['Uzvards']) && !empty($_POST['Pers_kods']) && !empty($_POST['studiju_programma']) && !empty($_POST['CE_P1']) && !empty($_POST['CE_V1']) && !empty($_POST['CE_P2']) && !empty($_POST['CE_V2']) && !empty($_POST['Vid'])){
+    $rangs = 0;
+    if($_POST['CE_V1'] == 'A'){
+        $rangs = $rangs + 6;
+    } else if ($_POST['CE_V1'] == 'B'){
+        $rangs = $rangs + 5;
+    }else if ($_POST['CE_V1'] == 'C'){
+        $rangs = $rangs + 4;
+    }else if ($_POST['CE_V1'] == 'D'){
+        $rangs = $rangs + 3;
+    }else if ($_POST['CE_V1'] == 'E'){
+        $rangs = $rangs + 2;
+    }else if ($_POST['CE_V1'] == 'F'){
+        $rangs = $rangs + 1;
+    };
+
+    if($_POST['CE_V2'] == 'A'){
+        $rangs = $rangs + 6;
+    } else if ($_POST['CE_V2'] == 'B'){
+        $rangs = $rangs + 5;
+    }else if ($_POST['CE_V2'] == 'C'){
+        $rangs = $rangs + 4;
+    }else if ($_POST['CE_V2'] == 'D'){
+        $rangs = $rangs + 3;
+    }else if ($_POST['CE_V2'] == 'E'){
+        $rangs = $rangs + 2;
+    }else if ($_POST['CE_V2'] == 'F'){
+        $rangs = $rangs + 1;
+    };
+
+	$param=array(
+        array('s',$_POST['Vards']),
+        array('s',$_POST['Uzvards']),
+		array('s',md5('f^89#hJ!'.md5($_POST['Pers_kods']))),
+        array('s',$_POST['studiju_programma']),
+        array('s',$_POST['CE_P1']),
+        array('s',$_POST['CE_V1']),
+        array('s',$_POST['CE_P2']),
+        array('s',$_POST['CE_V2']),
+        array('s',$rangs),
+        array('s',$_POST['Vid'])
+	);
+	
+	db::query("INSERT INTO lietotaji (`Vards`, `Uzvards`, `Pers_kods`, `Stud_prog`, `CE_P1`, `CE_V1`, `CE_P2`, `CE_V2`, `Rangs`, `Vid`) VALUES(?,?,?,?,?,?,?,?,?,?)",$param);
+}
+
+
 echo '
 <!DOCTYPE HTML>
 <html>
