@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2023 at 12:57 AM
+-- Generation Time: Apr 22, 2023 at 02:05 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -47,7 +47,13 @@ CREATE TABLE `lietotaji` (
 --
 
 INSERT INTO `lietotaji` (`id`, `date`, `Vards`, `Uzvards`, `Pers_kods`, `Stud_prog`, `CE_P1`, `CE_V1`, `CE_P2`, `CE_V2`, `Rangs`, `Vid`) VALUES
-(1, '2023-04-20', 'Madars', 'Vagalis', '180303-22226', 'IT', 'math', 'A', 'lang', 'B', 11, 7);
+(1, '2023-04-20', 'Madars', 'Vagalis', '180303-22226', 'IT', 'math', 'A', 'lang', 'B', 11, 7),
+(2, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(3, '2023-04-22', 'Elīna Laila', 'Frijāre', '140403-2', 'IT', 'math', 'A', 'lang', 'B', 11, 8),
+(4, '2023-04-22', 'Gints', 'Kadeģis', '250703-2', 'IT', 'math', 'B', 'lang', 'B', 10, 7),
+(5, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'new_media', 'LV', 'A', 'lang', 'A', 12, 8),
+(6, '2023-04-20', 'Madars', 'Vagalis', '180303-22226', 'new_media', 'LV', 'A', 'lang', 'B', 11, 7),
+(7, '2023-04-22', 'Elīna Laila', 'Frijāre', '140403-2', 'skolot', 'LV', 'A', 'math', 'B', 11, 8);
 
 -- --------------------------------------------------------
 
@@ -97,7 +103,7 @@ ALTER TABLE `sadalas`
 -- AUTO_INCREMENT for table `lietotaji`
 --
 ALTER TABLE `lietotaji`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `sadalas`

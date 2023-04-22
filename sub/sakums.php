@@ -2,7 +2,9 @@
 <?php
 
     # Tiek izveidots profils !!!!!!!!!!!!! NESTRĀDĀ VĒL !!!!!!!!!!!!
-    $rangs = 0;
+    # NEKAS NO $_POST NESTRĀDĀ
+
+    /*$rangs = 0;
     if(isset($_POST['CE_V1']) && isset($_POST['Iesniegt'])){
         if($_POST['CE_V1'] == 'A'){
             $rangs = $rangs + 6;
@@ -33,7 +35,7 @@
         }else if ($_POST['CE_V2'] == 'F'){
             $rangs = $rangs + 1;
         }
-    }
+    }*/
 
 
     if(isset($_POST['Vards'],$_POST['Uzvards'],$_POST['Pers_kods'],$_POST['studiju_programma'],$_POST['CE_P1'],$_POST['CE_V1'],$_POST['CE_P2'],$_POST['CE_V2'],$_POST['Vid'],$_POST['Iesniegt']) && !empty($_POST['Vards']) && !empty($_POST['Uzvards']) && !empty($_POST['Pers_kods']) && !empty($_POST['studiju_programma']) && !empty($_POST['CE_P1']) && !empty($_POST['CE_V1']) && !empty($_POST['CE_P2']) && !empty($_POST['CE_V2']) && !empty($_POST['Vid'])){
@@ -59,12 +61,11 @@ echo '
     <head>
         <title>Reģistrācija kursiem</title>
         <link rel="stylesheet" type="text/css" href="/css/styles.css">
-        <script src="../js/script.js"></script>
     </head>
     <body>
         <p>Reģistrēties studijām</p>
         <br \>
-        <form method="post">
+        <form action="" method="post">
                 Vārds: <input type="text" placeholder="Vārds" name="Vards">
             <br />
                 Uzvārds: <input type="text" placeholder="Uzvārds" name="Uzvards">
@@ -72,7 +73,7 @@ echo '
                 Personas kods: <input type="text" name="Pers_kods">
             <br />
                 <label for="studiju_programma">Studiju programma:</label>
-                <select id="studiju_programma" onchange="updateOptions()">
+                <select id="studiju_programma" name="studiju_programma" onchange="updateOptions()">
                     <option value="">--Izvēlies studiju programmu--</option>
                     <optgroup label="Dabas un inženierzinātņu fakultāte">
                         <option value="IT">Informācijas tehnoloģijas</option>
@@ -104,6 +105,7 @@ echo '
                         <option name="CE_P1" value="" selected disabled hidden>Izvēlies studijju programmu</option>
                     </select>
                     <!--Priekšments-->
+                    <!--
                     <select id="CE_V1" name="CE_V1">
                         <option value="">Atzīmē CE #1 Līmeni</option>
                         <option value="F">F</option>
@@ -112,13 +114,15 @@ echo '
                         <option value="C">C</option>
                         <option value="B">B</option>
                         <option value="A">A</option>
-                    </select>
+                    </select>-->
+                    <input type="text" placeholder="Līmenis #1 CE" name="CE_V1">
                     <!--līmenis-->
                 <br \>
                     <select id="CE_P2" disabled>
                         <option value="" selected disabled hidden>Izvēlies studijju programmu</option>
                     </select>
                     <!--Priekšments-->
+                    <!--
                     <select id="CE_V2" name="CE_V2">
                         <option value="" name="">Atzīmē CE #2 Līmeni</option>
                         <option value="F">F</option>
@@ -128,10 +132,11 @@ echo '
                         <option value="B">B</option>
                         <option value="A">A</option>
                     </select>
-                    <!--<input type="text" placeholder="Līmenis #2 CE" name="CE_V2">-->
+                    -->
+                    <input type="text" placeholder="Līmenis #2 CE" name="CE_V2">
                     <!--līmenis-->
             <br />
-                Vidējā atzīme beidzot vidusskolu: <input type="number" placeholder="Ievadi vidējo atzīmi" name="Vid">
+                Vidējā atzīme beidzot vidusskolu: <input type="number" placeholder="Ievadi vidējo atzīmi" name="Vid" value="">
             <br />
             <input type="button" name="Iesniegt" value="Iesniegt">
         </form>
@@ -229,9 +234,10 @@ echo '
         CE_V1 - Priekšmeta #1 vērtējums
         CE_V2 - Priekšmeta #2 vērtejums
 
-            lang - svešvaloda;
-            math - matemātika;
-            LV - Latviešu valoda
+            CE_P1 && CE_P2 variables:
+                lang - svešvaloda;
+                math - matemātika;
+                LV - Latviešu valoda
         
         Vid - vidējā atzīme;
         Iesniegt - pogai;
@@ -240,10 +246,18 @@ echo '
 
 
     </script>';
+    
+        # VAJADZĒS PĀRUNĀT REĢISTRĒŠANĀS SISTĒMU AR VOLKOVU
+        # TDL: Sazināties ar Volkovu un sarunāt konsultācijas ar viņu
 
-    if(isset($_POST['CE_V1']) && isset($_POST['CE_V2']) && isset($_POST['Iesniegt'])){
-        echo '<p>Rangs ir: '.$rangs.'</p>';
-    }
+
+    /*if(isset($_POST['CE_V1']) && isset($_POST['CE_V2']) && isset($_POST['Iesniegt'])){
+        echo '<p>CE_V1: '.$_POST['CE_V1'].'</p>';
+        echo '<p>CE_V2: '.$_POST['CE_V2'].'</p>';
+    }*/
+    if(isset($_POST['Vid'], $_POST['Iesniegt'])){
+        echo '<p>Vid: '.$_POST['Vid'].'</p>';
+    };
     echo '
 </html>'; 
 ?>
