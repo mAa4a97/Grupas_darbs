@@ -1,76 +1,76 @@
 <!-- sakums.php == reg.php -->
 <?php
 
-# Tiek izveidots profils !!!!!!!!!!!!! NESTRĀDĀ VĒL !!!!!!!!!!!!
-if(isset($_POST['Vards'],$_POST['Uzvards'],$_POST['Pers_kods'],$_POST['studiju_programma'],$_POST['CE_P1'],$_POST['CE_V1'],$_POST['CE_P2'],$_POST['CE_V2'],$_POST['Vid'],$_POST['Iesniegt']) && !empty($_POST['Vards']) && !empty($_POST['Uzvards']) && !empty($_POST['Pers_kods']) && !empty($_POST['studiju_programma']) && !empty($_POST['CE_P1']) && !empty($_POST['CE_V1']) && !empty($_POST['CE_P2']) && !empty($_POST['CE_V2']) && !empty($_POST['Vid'])){
+    # Tiek izveidots profils !!!!!!!!!!!!! NESTRĀDĀ VĒL !!!!!!!!!!!!
     $rangs = 0;
-    if($_POST['CE_V1'] == 'A'){
-        $rangs = $rangs + 6;
-    } else if ($_POST['CE_V1'] == 'B'){
-        $rangs = $rangs + 5;
-    }else if ($_POST['CE_V1'] == 'C'){
-        $rangs = $rangs + 4;
-    }else if ($_POST['CE_V1'] == 'D'){
-        $rangs = $rangs + 3;
-    }else if ($_POST['CE_V1'] == 'E'){
-        $rangs = $rangs + 2;
-    }else if ($_POST['CE_V1'] == 'F'){
-        $rangs = $rangs + 1;
-    };
+    if(isset($_POST['CE_V1']) && isset($_POST['Iesniegt'])){
+        if($_POST['CE_V1'] == 'A'){
+            $rangs = $rangs + 6;
+        } else if ($_POST['CE_V1'] == 'B'){
+            $rangs = $rangs + 5;
+        }else if ($_POST['CE_V1'] == 'C'){
+            $rangs = $rangs + 4;
+        }else if ($_POST['CE_V1'] == 'D'){
+            $rangs = $rangs + 3;
+        }else if ($_POST['CE_V1'] == 'E'){
+            $rangs = $rangs + 2;
+        }else if ($_POST['CE_V1'] == 'F'){
+            $rangs = $rangs + 1;
+        }
+    }
 
-    if($_POST['CE_V2'] == 'A'){
-        $rangs = $rangs + 6;
-    } else if ($_POST['CE_V2'] == 'B'){
-        $rangs = $rangs + 5;
-    }else if ($_POST['CE_V2'] == 'C'){
-        $rangs = $rangs + 4;
-    }else if ($_POST['CE_V2'] == 'D'){
-        $rangs = $rangs + 3;
-    }else if ($_POST['CE_V2'] == 'E'){
-        $rangs = $rangs + 2;
-    }else if ($_POST['CE_V2'] == 'F'){
-        $rangs = $rangs + 1;
-    };
+    if(isset($_POST['CE_V1']) && isset($_POST['Iesniegt'])){
+        if($_POST['CE_V2'] == 'A'){
+            $rangs = $rangs + 6;
+        } else if ($_POST['CE_V2'] == 'B'){
+            $rangs = $rangs + 5;
+        }else if ($_POST['CE_V2'] == 'C'){
+            $rangs = $rangs + 4;
+        }else if ($_POST['CE_V2'] == 'D'){
+            $rangs = $rangs + 3;
+        }else if ($_POST['CE_V2'] == 'E'){
+            $rangs = $rangs + 2;
+        }else if ($_POST['CE_V2'] == 'F'){
+            $rangs = $rangs + 1;
+        }
+    }
 
-	$param=array(
-        array('s',$_POST['Vards']),
-        array('s',$_POST['Uzvards']),
-		array('s',md5('f^89#hJ!'.md5($_POST['Pers_kods']))),
-        array('s',$_POST['studiju_programma']),
-        array('s',$_POST['CE_P1']),
-        array('s',$_POST['CE_V1']),
-        array('s',$_POST['CE_P2']),
-        array('s',$_POST['CE_V2']),
-        array('s',$rangs),
-        array('s',$_POST['Vid'])
-	);
-	
-	db::query("INSERT INTO lietotaji (`Vards`, `Uzvards`, `Pers_kods`, `Stud_prog`, `CE_P1`, `CE_V1`, `CE_P2`, `CE_V2`, `Rangs`, `Vid`) VALUES(?,?,?,?,?,?,?,?,?,?)",$param);
-}
 
+    if(isset($_POST['Vards'],$_POST['Uzvards'],$_POST['Pers_kods'],$_POST['studiju_programma'],$_POST['CE_P1'],$_POST['CE_V1'],$_POST['CE_P2'],$_POST['CE_V2'],$_POST['Vid'],$_POST['Iesniegt']) && !empty($_POST['Vards']) && !empty($_POST['Uzvards']) && !empty($_POST['Pers_kods']) && !empty($_POST['studiju_programma']) && !empty($_POST['CE_P1']) && !empty($_POST['CE_V1']) && !empty($_POST['CE_P2']) && !empty($_POST['CE_V2']) && !empty($_POST['Vid'])){
+        $param=array(
+            array('s',$_POST['Vards']),
+            array('s',$_POST['Uzvards']),
+            array('s',md5('f^89#hJ!'.md5($_POST['Pers_kods']))),
+            array('s',$_POST['studiju_programma']),
+            array('s',$_POST['CE_P1']),
+            array('s',$_POST['CE_V1']),
+            array('s',$_POST['CE_P2']),
+            array('s',$_POST['CE_V2']),
+            array('s',$rangs),
+            array('s',$_POST['Vid'])
+        );
+        
+        //db::query("INSERT INTO lietotaji (`Vards`, `Uzvards`, `Pers_kods`, `Stud_prog`, `CE_P1`, `CE_V1`, `CE_P2`, `CE_V2`, `Rangs`, `Vid`) VALUES(?,?,?,?,?,?,?,?,?,?)",$param);
+    }
 
 echo '
 <!DOCTYPE HTML>
 <html>
     <head>
         <title>Reģistrācija kursiem</title>
-        <link rel="stylesheet" type="text/css" href="../css/styles.css">
+        <link rel="stylesheet" type="text/css" href="/css/styles.css">
         <script src="../js/script.js"></script>
     </head>
     <body>
         <p>Reģistrēties studijām</p>
         <br \>
-        <form>
-            <div id="vards">
+        <form method="post">
                 Vārds: <input type="text" placeholder="Vārds" name="Vards">
-            </div>
-            <div id="uzvards">
+            <br />
                 Uzvārds: <input type="text" placeholder="Uzvārds" name="Uzvards">
-            </div>
-            <div id="personas_kods">
+            <br />
                 Personas kods: <input type="text" name="Pers_kods">
-            </div>
-            <div id="stud_program">
+            <br />
                 <label for="studiju_programma">Studiju programma:</label>
                 <select id="studiju_programma" onchange="updateOptions()">
                     <option value="">--Izvēlies studiju programmu--</option>
@@ -97,16 +97,14 @@ echo '
                         <option value="tour_vad">Tūrisma un rekreācijas vadība</option>
                     </optgroup>
                 </select>
-            </div>
-            <div id="CE_level">
+            <br />
                 Centralizēto eksāmenu līmenis:
                 <br \>
                     <select id="CE_P1" disabled>
-                        <option value="" selected disabled hidden>Izvēlies studijju programmu</option>
+                        <option name="CE_P1" value="" selected disabled hidden>Izvēlies studijju programmu</option>
                     </select>
                     <!--Priekšments-->
-                    <select id="CE_V1>
-                        <option value=""></option> <!--Kaut kas nestrādā ar pirmo selection-->
+                    <select id="CE_V1" name="CE_V1">
                         <option value="">Atzīmē CE #1 Līmeni</option>
                         <option value="F">F</option>
                         <option value="E">E</option>
@@ -121,9 +119,8 @@ echo '
                         <option value="" selected disabled hidden>Izvēlies studijju programmu</option>
                     </select>
                     <!--Priekšments-->
-                    <select id="CE_V2>
-                        <option value=""></option> <!--Kaut kas nestrādā ar pirmo selection-->
-                        <option value="">Atzīmē CE #2 Līmeni</option>
+                    <select id="CE_V2" name="CE_V2">
+                        <option value="" name="">Atzīmē CE #2 Līmeni</option>
                         <option value="F">F</option>
                         <option value="E">E</option>
                         <option value="D">D</option>
@@ -133,11 +130,10 @@ echo '
                     </select>
                     <!--<input type="text" placeholder="Līmenis #2 CE" name="CE_V2">-->
                     <!--līmenis-->
-            </div>
-            <div id="avg_atzime">
+            <br />
                 Vidējā atzīme beidzot vidusskolu: <input type="number" placeholder="Ievadi vidējo atzīmi" name="Vid">
-            </div>
-            <input type="button" value="Iesniegt">
+            <br />
+            <input type="button" name="Iesniegt" value="Iesniegt">
         </form>
     </body>
 
@@ -243,6 +239,16 @@ echo '
         */
 
 
-    </script>
+    </script>';
+
+    // Kaut kā vajag dabūt, lai tas stulbai $_POST strādā... Salīdzinu to ar klasē darīto. Nesaprotu, kā tas nostrādāja, kā vajag.
+    // Tu tak redzi failos .lib (folderis) un test5.php failus, ne?
+    // Nav... ātri commit + push githubā
+    
+    //  Ne, man kkas jauzspiez, lai kipa refreshotu? ok
+    if(isset($_POST['CE_V1']) && isset($_POST['CE_V2']) && isset($_POST['Iesniegt'])){
+        echo '<p>Rangs ir: '.$rangs.'</p>';
+    }
+    echo '
 </html>'; 
 ?>
