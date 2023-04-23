@@ -102,7 +102,7 @@ echo '
                 Centralizēto eksāmenu līmenis:
                 <br \>
                     <select id="CE_P1" disabled>
-                        <option name="CE_P1" value="" selected disabled hidden>Izvēlies studijju programmu</option>
+                        <option name="CE_P1" value="" selected disabled hidden>Izvēlies studiju programmu</option>
                     </select>
                     <!--Priekšments-->
                     <!--
@@ -119,7 +119,7 @@ echo '
                     <!--līmenis-->
                 <br \>
                     <select id="CE_P2" disabled>
-                        <option value="" selected disabled hidden>Izvēlies studijju programmu</option>
+                        <option value="" selected disabled hidden>Izvēlies studiju programmu</option>
                     </select>
                     <!--Priekšments-->
                     <!--
