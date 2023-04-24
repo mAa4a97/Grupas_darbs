@@ -1,30 +1,125 @@
 <!-- sakums.php == reg.php -->
 <?php
 
+    # Tiek izveidots profils !!!!!!!!!!!!! NESTRĀDĀ VĒL !!!!!!!!!!!!
+    # NEKAS NO $_POST NESTRĀDĀ
+    /*
+    if(isset($_POST['CE_V1']) && isset($_POST['CE_V2']) && isset($_POST['Iesniegt'])){
+        $rangs = 0;
+
+        $CE_Vertejums1 = $_POST['CE_V1'];
+        if($CE_Vertejums1 == 'A'){
+            $rangs = $rangs + 6;
+        } else if ($CE_Vertejums1 == 'B'){
+            $rangs = $rangs + 5;
+        }else if ($CE_Vertejums1 == 'C'){
+            $rangs = $rangs + 4;
+        }else if ($CE_Vertejums1 == 'D'){
+            $rangs = $rangs + 3;
+        }else if ($CE_Vertejums1 == 'E'){
+            $rangs = $rangs + 2;
+        }else if ($CE_Vertejums1 == 'F'){
+            $rangs = $rangs + 1;
+        }
+
+        $CE_Vertejums2 = $_POST['CE_V2'];
+        if($CE_Vertejums2 == 'A'){
+            $rangs = $rangs + 6;
+        } else if ($CE_Vertejums2 == 'B'){
+            $rangs = $rangs + 5;
+        }else if ($CE_Vertejums2 == 'C'){
+            $rangs = $rangs + 4;
+        }else if ($CE_Vertejums2 == 'D'){
+            $rangs = $rangs + 3;
+        }else if ($CE_Vertejums2 == 'E'){
+            $rangs = $rangs + 2;
+        }else if ($CE_Vertejums2 == 'F'){
+            $rangs = $rangs + 1;
+        }
+    }
+    */
+
+
+    if(isset($_POST['Vards'],$_POST['Uzvards'],$_POST['Pers_kods'],$_POST['studiju_programma'],$_POST['CE_P1'],$_POST['CE_V1'],$_POST['CE_P2'],$_POST['CE_V2'],$_POST['Vid'],$_POST['Iesniegt']) && !empty($_POST['Vards']) && !empty($_POST['Uzvards']) && !empty($_POST['Pers_kods']) && !empty($_POST['studiju_programma']) && !empty($_POST['CE_P1']) && !empty($_POST['CE_V1']) && !empty($_POST['CE_P2']) && !empty($_POST['CE_V2']) && !empty($_POST['Vid'])){
+        $lietotajs_Vards = $_POST['Vards'];
+        $lietotajs_Uzvards = $_POST['Uzvards'];
+        $lietotajs_Pers_kods = $_POST['Pers_kods'];
+        $lietotajs_studiju_programma = $_POST['studiju_programma'];
+        $lietotajs_CE_P1 = $_POST['CE_P1'];
+        $lietotajs_CE_V1 = $_POST['CE_V1'];
+        $lietotajs_CE_P2 = $_POST['CE_P2'];
+        $lietotajs_CE_V2 = $_POST['CE_V2'];
+
+        $rangs = 0;
+
+        $CE_Vertejums1 = $_POST['CE_V1'];
+        if($CE_Vertejums1 == 'A'){
+            $rangs = $rangs + 6;
+        } else if ($CE_Vertejums1 == 'B'){
+            $rangs = $rangs + 5;
+        }else if ($CE_Vertejums1 == 'C'){
+            $rangs = $rangs + 4;
+        }else if ($CE_Vertejums1 == 'D'){
+            $rangs = $rangs + 3;
+        }else if ($CE_Vertejums1 == 'E'){
+            $rangs = $rangs + 2;
+        }else if ($CE_Vertejums1 == 'F'){
+            $rangs = $rangs + 1;
+        };
+
+        $CE_Vertejums2 = $_POST['CE_V2'];
+        if($CE_Vertejums2 == 'A'){
+            $rangs = $rangs + 6;
+        } else if ($CE_Vertejums2 == 'B'){
+            $rangs = $rangs + 5;
+        }else if ($CE_Vertejums2 == 'C'){
+            $rangs = $rangs + 4;
+        }else if ($CE_Vertejums2 == 'D'){
+            $rangs = $rangs + 3;
+        }else if ($CE_Vertejums2 == 'E'){
+            $rangs = $rangs + 2;
+        }else if ($CE_Vertejums2 == 'F'){
+            $rangs = $rangs + 1;
+        };
+
+        $lietotajs_rangs = $rangs;
+        $lietotajs_Vid = $_POST['Vid'];
+
+        $param=array(
+            array('s',$lietotajs_Vards),
+            array('s',$lietotajs_Uzvards),
+            array('s',md5('f^89#hJ!'.md5($lietotajs_Pers_kods))),
+            array('s',$lietotajs_studiju_programma),
+            array('s',$lietotajs_CE_P1),
+            array('s',$lietotajs_CE_V1),
+            array('s',$lietotajs_CE_P2),
+            array('s',$lietotajs_CE_V2),
+            array('s',$rangs),
+            array('s',$lietotajs_Vid)
+        );
+        
+        db::query("INSERT INTO lietotaji (`Vards`, `Uzvards`, `Pers_kods`, `Stud_prog`, `CE_P1`, `CE_V1`, `CE_P2`, `CE_V2`, `Rangs`, `Vid`) VALUES(?,?,?,?,?,?,?,?,?,?)",$param);
+    }
+
 echo '
 <!DOCTYPE HTML>
 <html>
     <head>
         <title>Reģistrācija kursiem</title>
-        <link rel="stylesheet" type="text/css" href="../css/styles.css">
-        <script src="../js/script.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css">
     </head>
     <body>
         <p>Reģistrēties studijām</p>
         <br \>
-        <form>
-            <div id="vards">
+        <form action="" method="post">
                 Vārds: <input type="text" placeholder="Vārds" name="Vards">
-            </div>
-            <div id="uzvards">
+            <br />
                 Uzvārds: <input type="text" placeholder="Uzvārds" name="Uzvards">
-            </div>
-            <div id="personas_kods">
+            <br />
                 Personas kods: <input type="text" name="Pers_kods">
-            </div>
-            <div id="stud_program">
+            <br />
                 <label for="studiju_programma">Studiju programma:</label>
-                <select id="studiju_programma" onchange="updateOptions()">
+                <select id="studiju_programma" name="studiju_programma" onchange="updateOptions()">
                     <option value="">--Izvēlies studiju programmu--</option>
                     <optgroup label="Dabas un inženierzinātņu fakultāte">
                         <option value="IT">Informācijas tehnoloģijas</option>
@@ -49,16 +144,14 @@ echo '
                         <option value="tour_vad">Tūrisma un rekreācijas vadība</option>
                     </optgroup>
                 </select>
-            </div>
-            <div id="CE_level">
+            <br />
                 Centralizēto eksāmenu līmenis:
                 <br \>
                     <select id="CE_P1" disabled>
-                        <option value="" selected disabled hidden>Izvēlies studijju programmu</option>
+                        <option name="CE_P1" value="" selected disabled hidden>Izvēlies studiju programmu</option>
                     </select>
                     <!--Priekšments-->
-                    <select id="CE_V1>
-                        <option value=""></option> <!--Kaut kas nestrādā ar pirmo selection-->
+                    <select id="CE_V1" name="CE_V1">
                         <option value="">Atzīmē CE #1 Līmeni</option>
                         <option value="F">F</option>
                         <option value="E">E</option>
@@ -67,15 +160,17 @@ echo '
                         <option value="B">B</option>
                         <option value="A">A</option>
                     </select>
+                    <!--
+                    <input type="text" placeholder="Līmenis #1 CE" name="CE_V1">
+                    -->
                     <!--līmenis-->
                 <br \>
                     <select id="CE_P2" disabled>
-                        <option value="" selected disabled hidden>Izvēlies studijju programmu</option>
+                        <option value="" selected disabled hidden>Izvēlies studiju programmu</option>
                     </select>
                     <!--Priekšments-->
-                    <select id="CE_V2>
-                        <option value=""></option> <!--Kaut kas nestrādā ar pirmo selection-->
-                        <option value="">Atzīmē CE #2 Līmeni</option>
+                    <select id="CE_V2" name="CE_V2">
+                        <option value="" name="">Atzīmē CE #2 Līmeni</option>
                         <option value="F">F</option>
                         <option value="E">E</option>
                         <option value="D">D</option>
@@ -83,13 +178,14 @@ echo '
                         <option value="B">B</option>
                         <option value="A">A</option>
                     </select>
-                    <!--<input type="text" placeholder="Līmenis #2 CE" name="CE_V2">-->
+                    <!--
+                    <input type="text" placeholder="Līmenis #2 CE" name="CE_V2">
+                    -->
                     <!--līmenis-->
-            </div>
-            <div id="avg_atzime">
-                Vidējā atzīme beidzot vidusskolu: <input type="number" placeholder="Ievadi vidējo atzīmi" name="Vid">
-            </div>
-            <input type="button" value="Iesniegt">
+            <br />
+                Vidējā atzīme beidzot vidusskolu: <input type="number" placeholder="Ievadi vidējo atzīmi" name="Vid" value="">
+            <br />
+            <input type="submit" name="Iesniegt" value="Iesniegt">
         </form>
     </body>
 
@@ -185,9 +281,10 @@ echo '
         CE_V1 - Priekšmeta #1 vērtējums
         CE_V2 - Priekšmeta #2 vērtejums
 
-            lang - svešvaloda;
-            math - matemātika;
-            LV - Latviešu valoda
+            CE_P1 && CE_P2 variables:
+                lang - svešvaloda;
+                math - matemātika;
+                LV - Latviešu valoda
         
         Vid - vidējā atzīme;
         Iesniegt - pogai;
@@ -195,6 +292,26 @@ echo '
         */
 
 
-    </script>
+    </script>';
+    
+        # VAJADZĒS PĀRUNĀT REĢISTRĒŠANĀS SISTĒMU AR VOLKOVU
+        # TDL: Sazināties ar Volkovu un sarunāt konsultācijas ar viņu
+
+
+    /*if(isset($_POST['CE_V1']) && isset($_POST['CE_V2']) && isset($_POST['Iesniegt'])){
+        echo '<p>CE_V1: '.$_POST['CE_V1'].'</p>';
+        echo '<p>CE_V2: '.$_POST['CE_V2'].'</p>';
+    }*/
+    /*
+    if(isset($_POST['Vid'], $_POST['Iesniegt'])){
+        echo '<p>Vid: '.$_POST['Vid'].'</p>';
+    };
+    */
+    /*
+    if(isset($_POST['Vards'],$_POST['Uzvards'],$_POST['Pers_kods'],$_POST['studiju_programma'],$_POST['CE_P1'],$_POST['CE_V1'],$_POST['CE_P2'],$_POST['CE_V2'],$_POST['Vid'],$_POST['Iesniegt']) && !empty($_POST['Vards']) && !empty($_POST['Uzvards']) && !empty($_POST['Pers_kods']) && !empty($_POST['studiju_programma']) && !empty($_POST['CE_P1']) && !empty($_POST['CE_V1']) && !empty($_POST['CE_P2']) && !empty($_POST['CE_V2']) && !empty($_POST['Vid'])){
+        echo $lietotajs_Vards, $lietotajs_Uzvards, $lietotajs_Pers_kods, $lietotajs_studiju_programma, $lietotajs_CE_P1, $lietotajs_CE_V1, $lietotajs_CE_P2, $lietotajs_CE_P2, $lietotajs_rangs, $lietotajs_Vid;
+    };
+    */
+    echo '
 </html>'; 
 ?>
