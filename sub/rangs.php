@@ -41,18 +41,57 @@ if(isset($_POST['studiju_programma_selection']) && !empty($_POST['studiju_progra
 //Saraksta skata izvade (no lietotaji.php)
 //Redzeju grupu_darbs.sql "CREATE TABLE `lietotaji` ..." tapec nopratu, ka ari te tad jaatstaj tas $lietotaji mainigais
     $studiju_programma_selected = $_POST['studiju_programma_selection'];
+
     //echo $studiju_programma_selected;
     $lietotaji=db::query("SELECT * FROM lietotaji
     WHERE Stud_prog LIKE '".$studiju_programma_selected."'
     ORDER BY `lietotaji`.`Rangs` DESC, `lietotaji`.`Vid` DESC;");
 
-    // Tiks izmainīts query, kurā tiks iekļauts check - kura studiju programma dropdown izvēlnē tika izvēlēta, lai netiktu uzrādīta lieka informācija par studiju programmām, kurās lietotājs NAV reģistrējies.
+    // Definējam budžetu vietu skaitu vadoties pēc liepu.lv pamastudiju programmu informācijas
+    $budget_places = 0;
+
+    /*
+    Studiju programmas špikeris:
+        IT  40
+        vied_tech   15 1
+        vides_tech  15 1
+
+        baltu_val   10 2
+        eu_val  20 3
+        new_media   31
+
+        logop   15 1
+        soc_darb    15 1
+        pirmsk_skol 20 3
+        sakumsk_skol    20 3
+        skolot  80
+
+        buisness    16
+        kult_vad    10 2
+        tour_vad    10 2
+    */
+    if($studiju_programma_selected == "IT"){
+        $budget_places = 40;
+    } else if($studiju_programma_selected == "new_media"){
+        $budget_places = 31;
+    } else if($studiju_programma_selected == "buisness"){
+        $budget_places = 16;
+    } else if($studiju_programma_selected == "skolot"){
+        $budget_places = 80;
+    } else if($studiju_programma_selected == "vied_tech" || $studiju_programma_selected == "vides_tech" || $studiju_programma_selected == "logop" || $studiju_programma_selected == "soc_darb"){
+        $budget_places = 15;
+    } else if($studiju_programma_selected == "baltu_val" || $studiju_programma_selected == "kult_vad" || $studiju_programma_selected == "tour_vad"){
+        $budget_places = 10;
+    } else if($studiju_programma_selected == "eu_val" || $studiju_programma_selected == "pirmsk_skol" || $studiju_programma_selected == "sakumsk_skol"){
+        $budget_places = 20;
+    }
 
 
     // Te izvada tabulas 1. rindu jeb to kolonnu virsrakstus
     if($lietotaji!=NULL){
         echo'
-        <h1>'.$studiju_programma_selected.'</h1>
+        <h1> Studiju programma: '.$studiju_programma_selected.'<br />
+        Budžeta vietas: '.$budget_places.'</h1>
         <table>
             <thead>
                 <tr>
@@ -64,6 +103,7 @@ if(isset($_POST['studiju_programma_selection']) && !empty($_POST['studiju_progra
                     <th>Studiju programma</th>
                     <th>Rangs</th>
                     <th>Vidējā atzīme</th>
+                    <th>Budžetā?</th>
                 </tr>
             </thead>
             <tbody>';
@@ -81,15 +121,29 @@ if(isset($_POST['studiju_programma_selection']) && !empty($_POST['studiju_progra
                         <td>'.$lietotajs['date'].'</td>
                         <td>'.$lietotajs['Stud_prog'].'</td>
                         <td>'.$lietotajs['Rangs'].'</td>
-                        <td>'.$lietotajs['Vid'].'</td>'; //Rangs = Videja atzime
-                        // Es minu, ka nakoso 9 rindinu vieta vajag sakartot pec ranga izmantojot SQL sintaksi
+                        <td>'.$lietotajs['Vid'].'</td>';
+                        if(($budget_places - $vieta + 1) > 0){
+                            echo
+                        '<td>Budžetā</td>';
+                        } else {
+                            echo
+                        '<td>Nē</td>';
+                        }
                     echo'
                     </tr>';
                     $vieta++;
                 }
             echo'
             </tbody>
-        </table>';	
+        </table>
+        <h3>Pieteikušies programmai: '.($vieta-1).'<br>
+        Atlikušās budžeta vietas: ';
+        if(($remaining = $budget_places - $vieta + 1) > 0){
+            echo $remaining;
+        }	else {
+            echo '0';
+        }
+        echo '</h3>';
     }
     else{
         echo'<p>Lietotāju nav!</p>';

@@ -39,8 +39,8 @@
     }
     */
 
-
-    if(isset($_POST['Vards'],$_POST['Uzvards'],$_POST['Pers_kods'],$_POST['studiju_programma'],$_POST['CE_P1'],$_POST['CE_V1'],$_POST['CE_P2'],$_POST['CE_V2'],$_POST['Vid'],$_POST['Iesniegt']) && !empty($_POST['Vards']) && !empty($_POST['Uzvards']) && !empty($_POST['Pers_kods']) && !empty($_POST['studiju_programma']) && !empty($_POST['CE_P1']) && !empty($_POST['CE_V1']) && !empty($_POST['CE_P2']) && !empty($_POST['CE_V2']) && !empty($_POST['Vid'])){
+    
+    if(isset($_POST['Vards']) && isset($_POST['Uzvards']) && isset($_POST['Pers_kods']) && isset($_POST['studiju_programma']) && isset($_POST['CE_P1']) && isset($_POST['CE_V1']) && isset($_POST['CE_P2']) && isset($_POST['CE_V2']) && isset($_POST['Vid']) && isset($_POST['Iesniegt']) && !empty($_POST['Vards']) && !empty($_POST['Uzvards']) && !empty($_POST['Pers_kods']) && !empty($_POST['studiju_programma']) && !empty($_POST['CE_P1']) && !empty($_POST['CE_V1']) && !empty($_POST['CE_P2']) && !empty($_POST['CE_V2']) && !empty($_POST['Vid'])){
         $lietotajs_Vards = $_POST['Vards'];
         $lietotajs_Uzvards = $_POST['Uzvards'];
         $lietotajs_Pers_kods = $_POST['Pers_kods'];
@@ -85,6 +85,7 @@
         $lietotajs_rangs = $rangs;
         $lietotajs_Vid = $_POST['Vid'];
 
+        
         $param=array(
             array('s',$lietotajs_Vards),
             array('s',$lietotajs_Uzvards),
@@ -94,11 +95,25 @@
             array('s',$lietotajs_CE_V1),
             array('s',$lietotajs_CE_P2),
             array('s',$lietotajs_CE_V2),
-            array('s',$rangs),
-            array('s',$lietotajs_Vid)
+            array('i',$rangs),
+            array('i',$lietotajs_Vid)
         );
         
-        db::query("INSERT INTO lietotaji (`Vards`, `Uzvards`, `Pers_kods`, `Stud_prog`, `CE_P1`, `CE_V1`, `CE_P2`, `CE_V2`, `Rangs`, `Vid`) VALUES(?,?,?,?,?,?,?,?,?,?)",$param);
+        if(isset($_POST['Pers_kods']) && !empty($_POST['Pers_kods'])){
+            $sifrets_lietotajs = md5('f^89#hJ!'.md5($lietotajs_Pers_kods));
+            $ierakstu_skaits=db::query("SELECT COUNT(Pers_kods) as 'Reg_skaits' FROM lietotaji
+            WHERE Pers_kods LIKE '".$sifrets_lietotajs."'");
+            foreach($ierakstu_skaits as $ieraksts){
+                $skaits = $ieraksts['Reg_skaits'];
+            }
+            //echo "<h1>".$skaits."</h1>";
+            if($skaits < 3){
+                db::query("INSERT INTO lietotaji (`Vards`, `Uzvards`, `Pers_kods`, `Stud_prog`, `CE_P1`, `CE_V1`, `CE_P2`, `CE_V2`, `Rangs`, `Vid`) VALUES(?,?,?,?,?,?,?,?,?,?)",$param);
+                echo '<h1> Veiksmīgi tiki reģistrēts kursam: '.$lietotajs_studiju_programma.'</h1>';
+            } else {
+                echo '<h1 style="color: red"> Tu jau esi reģisrējies maksimāli atļautās trīs reizes!</h1>';
+            }
+        }
     }
 
 echo '
@@ -147,8 +162,10 @@ echo '
             <br />
                 Centralizēto eksāmenu līmenis:
                 <br \>
-                    <select id="CE_P1" disabled>
-                        <option name="CE_P1" value="" selected disabled hidden>Izvēlies studiju programmu</option>
+                    <select id="CE_P1" name="CE_P1">
+                        <option value="math">Matemātika</option>
+                        <option value="lang">Svešvaloda</option>
+                        <option value="LV">Latviešu valoda</option>
                     </select>
                     <!--Priekšments-->
                     <select id="CE_V1" name="CE_V1">
@@ -165,8 +182,10 @@ echo '
                     -->
                     <!--līmenis-->
                 <br \>
-                    <select id="CE_P2" disabled>
-                        <option value="" selected disabled hidden>Izvēlies studiju programmu</option>
+                    <select id="CE_P2" name="CE_P2">
+                        <option value="math">Matemātika</option>
+                        <option value="lang">Svešvaloda</option>
+                        <option value="LV">Latviešu valoda</option>
                     </select>
                     <!--Priekšments-->
                     <select id="CE_V2" name="CE_V2">
@@ -191,66 +210,35 @@ echo '
 
     <!-- // Kad lietotājs reģistrējoties izvēlas kādu no studiju programmām, automātiski šis script liek izvēlēties CE priekšmetu, kurā ir iepieciešams ievadīt CE līmeni -->
     <script>
-        function updateOptions() {
-            var firstDropdown = document.getElementById("studiju_programma");
-            var secondDropdown = document.getElementById("CE_P1");
-            var thirdDropdown = document.getElementById("CE_P2");
-            
-            // Clear existing options
-            secondDropdown.innerHTML = "";
-            thirdDropdown.innerHTML = "";
-            
-            // Add new options based on first dropdown selection
-            if (firstDropdown.value == "IT" || firstDropdown.value == "vied_tech" || firstDropdown.value == "vides_tech") {
-                var option1 = document.createElement("option");
-                option1.value = "math";
-                option1.innerHTML = "Matemātika";
-                secondDropdown.appendChild(option1);
-                
-                var option2 = document.createElement("option");
-                option2.value = "lang";
-                option2.innerHTML = "Svešvaloda";
-                thirdDropdown.appendChild(option2);
-            } else if (firstDropdown.value == "baltu_val" || firstDropdown.value == "eu_val" || firstDropdown.value == "new_media") {
-                var option1 = document.createElement("option");
-                option1.value = "LV";
-                option1.innerHTML = "Latviešu valoda";
-                secondDropdown.appendChild(option1);
-                
-                var option2 = document.createElement("option");
-                option2.value = "lang";
-                option2.innerHTML = "Svešvaloda";
-                thirdDropdown.appendChild(option2);
-            } else if (firstDropdown.value == "logop" || firstDropdown.value == "soc_darb" || firstDropdown.value == "pirmsk_skol" || firstDropdown.value == "sakumsk_skol" || firstDropdown.value == "skolot") {
-                var option1 = document.createElement("option");
-                option1.value = "LV";
-                option1.innerHTML = "Latviešu valoda";
-                secondDropdown.appendChild(option1);
-                
-                var option2 = document.createElement("option");
-                option2.value = "math";
-                option2.innerHTML = "Matemātika";
-                thirdDropdown.appendChild(option2);
-            } else if (firstDropdown.value == "buisness" || firstDropdown.value == "kult_vad" || firstDropdown.value == "tour_vad") {
-                var option1 = document.createElement("option");
-                option1.value = "LV";
-                option1.innerHTML = "Latviešu valoda";
-                secondDropdown.appendChild(option1);
-                
-                var option2 = document.createElement("option");
-                option2.value = "math";
-                option2.innerHTML = "Matemātika";
-                thirdDropdown.appendChild(option2);
-            } else {
-                var option1 = document.createElement("option");
-                option1.innerHTML = "Izvēlies studijju programmu";
-                secondDropdown.appendChild(option1);
+    $(document).ready(function() {
+        // Saglabā oriģinālās opcijas 2. un 3. dropdown menu
+        var originalOptions1 = $(`#CE_P1 option`).clone();
+        var originalOptions1 = $(`#CE_P2 option`).clone();
 
-                var option2 = document.createElement("option");
-                option2.innerHTML = "Izvēlies studijju programmu";
-                thirdDropdown.appendChild(option2);
+        $(`#studiju_programma`).change(function() {
+            // Saņem pirmā dropdown menu value
+            var selectedValue = $(this).val();
+            
+            // Noņem visas opcijas no abiem dropdown
+            $(`#CE_P1`).empty();
+            $(`#CE_P2`).empty();
+
+            if (selectedValue == `IT` || selectedValue == `vied_tech` || selectedValue == `vides_tech`) {
+                $(`#CE_P1`).append(originalOptions.filter(`[value="lang"]`));
+                $(`#CE_P2`).append(originalOptions.filter(`[value="math"]`));
+            } else if (selectedValue == `baltu_val` || selectedValue == `eu_val` || selectedValue == `new_media`) {
+                $(`#CE_P1`).append(originalOptions.filter(`[value="lang"]`));
+                $(`#CE_P2`).append(originalOptions.filter(`[value="LV"]`));
+            } else if (selectedValue == `logop` || selectedValue == `soc_darb` || selectedValue == `pirmsk_skol` || selectedValue == `sakumsk_skol` || || selectedValue == `skolot`) {
+                $(`#CE_P1`).append(originalOptions.filter(`[value="math"]`));
+                $(`#CE_P2`).append(originalOptions.filter(`[value="LV"]`));
+            } else if (selectedValue == `buisness` || selectedValue == `kult_vad` || selectedValue == `tour_vad`) {
+                $(`#CE_P1`).append(originalOptions.filter(`[value="math"]`));
+                $(`#CE_P2`).append(originalOptions.filter(`[value="LV"]`));
             }
-        }
+        });
+    });
+      
         
         /*Pieejamie variable (priekš PHP un DB):
         
@@ -303,15 +291,72 @@ echo '
         echo '<p>CE_V2: '.$_POST['CE_V2'].'</p>';
     }*/
     /*
-    if(isset($_POST['Vid'], $_POST['Iesniegt'])){
-        echo '<p>Vid: '.$_POST['Vid'].'</p>';
-    };
-    */
+    if(isset($_POST['Iesniegt'])){
+        $lietotajs_Vards = $_POST['Vards'];
+        $lietotajs_Uzvards = $_POST['Uzvards'];
+        $lietotajs_Pers_kods = $_POST['Pers_kods'];
+        $lietotajs_studiju_programma = $_POST['studiju_programma'];
+        $lietotajs_CE_P1 = $_POST['CE_P1'];
+        $lietotajs_CE_V1 = $_POST['CE_V1'];
+        $lietotajs_CE_P2 = $_POST['CE_P2'];
+        $lietotajs_CE_V2 = $_POST['CE_V2'];
+
+        $rangs = 0;
+
+        $CE_Vertejums1 = $_POST['CE_V1'];
+        if($CE_Vertejums1 == 'A'){
+            $rangs = $rangs + 6;
+        } else if ($CE_Vertejums1 == 'B'){
+            $rangs = $rangs + 5;
+        }else if ($CE_Vertejums1 == 'C'){
+            $rangs = $rangs + 4;
+        }else if ($CE_Vertejums1 == 'D'){
+            $rangs = $rangs + 3;
+        }else if ($CE_Vertejums1 == 'E'){
+            $rangs = $rangs + 2;
+        }else if ($CE_Vertejums1 == 'F'){
+            $rangs = $rangs + 1;
+        };
+
+        $CE_Vertejums2 = $_POST['CE_V2'];
+        if($CE_Vertejums2 == 'A'){
+            $rangs = $rangs + 6;
+        } else if ($CE_Vertejums2 == 'B'){
+            $rangs = $rangs + 5;
+        }else if ($CE_Vertejums2 == 'C'){
+            $rangs = $rangs + 4;
+        }else if ($CE_Vertejums2 == 'D'){
+            $rangs = $rangs + 3;
+        }else if ($CE_Vertejums2 == 'E'){
+            $rangs = $rangs + 2;
+        }else if ($CE_Vertejums2 == 'F'){
+            $rangs = $rangs + 1;
+        };
+
+        $lietotajs_rangs = $rangs;
+        $lietotajs_Vid = $_POST['Vid'];
+
+        echo '<p>'.$lietotajs_Vards.', '.$lietotajs_Uzvards.', '.$lietotajs_Pers_kods.', '.$lietotajs_studiju_programma.', '.$lietotajs_CE_P1.', '.$lietotajs_CE_V1.', '.$lietotajs_CE_P2.', '.$lietotajs_CE_V2.', '.$lietotajs_rangs.', '.$lietotajs_Vid.'';
+    };*/
+
     /*
     if(isset($_POST['Vards'],$_POST['Uzvards'],$_POST['Pers_kods'],$_POST['studiju_programma'],$_POST['CE_P1'],$_POST['CE_V1'],$_POST['CE_P2'],$_POST['CE_V2'],$_POST['Vid'],$_POST['Iesniegt']) && !empty($_POST['Vards']) && !empty($_POST['Uzvards']) && !empty($_POST['Pers_kods']) && !empty($_POST['studiju_programma']) && !empty($_POST['CE_P1']) && !empty($_POST['CE_V1']) && !empty($_POST['CE_P2']) && !empty($_POST['CE_V2']) && !empty($_POST['Vid'])){
         echo $lietotajs_Vards, $lietotajs_Uzvards, $lietotajs_Pers_kods, $lietotajs_studiju_programma, $lietotajs_CE_P1, $lietotajs_CE_V1, $lietotajs_CE_P2, $lietotajs_CE_P2, $lietotajs_rangs, $lietotajs_Vid;
     };
     */
+    if(isset($_POST["Pers_kods"]) && !empty($_POST["Pers_kods"])){
+        $sifrets_lietotajs = md5('f^89#hJ!'.md5($lietotajs_Pers_kods));
+        $ierakstu_skaits=db::query("SELECT COUNT(Pers_kods) as 'Reg_skaits' FROM lietotaji
+        WHERE Pers_kods LIKE '".$sifrets_lietotajs."'");
+        foreach($ierakstu_skaits as $ieraksts){
+            $skaits = $ieraksts['Reg_skaits'];
+        }
+        if($skaits <= 1){
+            echo '<br>
+            <h2>Tavs unikālais kods ir: '.$sifrets_lietotajs.'<h2>
+            <h3>Neaizmirsti šo kodu saglabāt</h3>';
+        }
+    };
     echo '
 </html>'; 
 ?>

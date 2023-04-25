@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2023 at 02:05 PM
+-- Generation Time: Apr 26, 2023 at 01:13 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -32,7 +32,7 @@ CREATE TABLE `lietotaji` (
   `date` date NOT NULL DEFAULT current_timestamp(),
   `Vards` varchar(20) NOT NULL,
   `Uzvards` varchar(20) NOT NULL,
-  `Pers_kods` varchar(12) NOT NULL,
+  `Pers_kods` varchar(100) NOT NULL,
   `Stud_prog` varchar(50) NOT NULL,
   `CE_P1` varchar(50) NOT NULL,
   `CE_V1` varchar(1) NOT NULL,
@@ -47,13 +47,54 @@ CREATE TABLE `lietotaji` (
 --
 
 INSERT INTO `lietotaji` (`id`, `date`, `Vards`, `Uzvards`, `Pers_kods`, `Stud_prog`, `CE_P1`, `CE_V1`, `CE_P2`, `CE_V2`, `Rangs`, `Vid`) VALUES
-(1, '2023-04-20', 'Madars', 'Vagalis', '180303-22226', 'IT', 'math', 'A', 'lang', 'B', 11, 7),
+(1, '2023-04-20', 'Madars', 'Vagalis', '1594225129f3a65e1a05922a8719ae75', 'IT', 'math', 'A', 'lang', 'B', 11, 7),
 (2, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
 (3, '2023-04-22', 'Elīna Laila', 'Frijāre', '140403-2', 'IT', 'math', 'A', 'lang', 'B', 11, 8),
 (4, '2023-04-22', 'Gints', 'Kadeģis', '250703-2', 'IT', 'math', 'B', 'lang', 'B', 10, 7),
 (5, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'new_media', 'LV', 'A', 'lang', 'A', 12, 8),
-(6, '2023-04-20', 'Madars', 'Vagalis', '180303-22226', 'new_media', 'LV', 'A', 'lang', 'B', 11, 7),
-(7, '2023-04-22', 'Elīna Laila', 'Frijāre', '140403-2', 'skolot', 'LV', 'A', 'math', 'B', 11, 8);
+(6, '2023-04-20', 'Madars', 'Vagalis', '1594225129f3a65e1a05922a8719ae75', 'new_media', 'LV', 'A', 'lang', 'B', 11, 7),
+(7, '2023-04-22', 'Elīna Laila', 'Frijāre', '140403-2', 'skolot', 'LV', 'A', 'math', 'B', 11, 8),
+(11, '2023-04-26', 'Madars', 'Vagalis', '1594225129f3a65e1a05922a8719ae75', 'skolot', 'LV', 'A', 'math', 'A', 12, 7),
+(16, '2023-04-26', 'Egils', 'Levits', '47ac91cb8c40ed20fdf497e820a91e25', 'soc_darb', 'math', 'A', 'math', 'A', 12, 10),
+(17, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(18, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(19, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(20, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(21, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(22, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(23, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(24, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(25, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(26, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(27, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(28, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(29, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(30, '2023-04-22', 'Elīna Laila', 'Frijāre', '140403-2', 'IT', 'math', 'A', 'lang', 'B', 11, 8),
+(31, '2023-04-22', 'Gints', 'Kadeģis', '250703-2', 'IT', 'math', 'B', 'lang', 'B', 10, 7),
+(32, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(33, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(34, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(35, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(36, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(37, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(38, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(39, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(40, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(41, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(42, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(43, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(44, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(45, '2023-04-22', 'Elīna Laila', 'Frijāre', '140403-2', 'IT', 'math', 'A', 'lang', 'B', 11, 8),
+(46, '2023-04-22', 'Gints', 'Kadeģis', '250703-2', 'IT', 'math', 'B', 'lang', 'B', 10, 7),
+(47, '2023-04-22', 'Gints', 'Kadeģis', '250703-2', 'IT', 'math', 'B', 'lang', 'B', 10, 7),
+(48, '2023-04-22', 'Elīna Laila', 'Frijāre', '140403-2', 'IT', 'math', 'A', 'lang', 'B', 11, 8),
+(49, '2023-04-22', 'Gints', 'Kadeģis', '250703-2', 'IT', 'math', 'B', 'lang', 'B', 10, 7),
+(50, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8),
+(51, '2023-04-22', 'Gints', 'Kadeģis', '250703-2', 'IT', 'math', 'B', 'lang', 'B', 10, 7),
+(52, '2023-04-22', 'Gints', 'Kadeģis', '250703-2', 'IT', 'math', 'B', 'lang', 'B', 10, 7),
+(53, '2023-04-22', 'Elīna Laila', 'Frijāre', '140403-2', 'IT', 'math', 'A', 'lang', 'B', 11, 8),
+(54, '2023-04-22', 'Gints', 'Kadeģis', '250703-2', 'IT', 'math', 'B', 'lang', 'B', 10, 7),
+(55, '2023-04-22', 'Amanda', 'Vītola', '110501-2', 'IT', 'math', 'A', 'lang', 'A', 12, 8);
 
 -- --------------------------------------------------------
 
@@ -103,7 +144,7 @@ ALTER TABLE `sadalas`
 -- AUTO_INCREMENT for table `lietotaji`
 --
 ALTER TABLE `lietotaji`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `sadalas`

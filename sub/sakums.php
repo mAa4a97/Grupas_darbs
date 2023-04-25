@@ -99,8 +99,21 @@
             array('i',$lietotajs_Vid)
         );
         
-        db::query("INSERT INTO lietotaji (`Vards`, `Uzvards`, `Pers_kods`, `Stud_prog`, `CE_P1`, `CE_V1`, `CE_P2`, `CE_V2`, `Rangs`, `Vid`) VALUES(?,?,?,?,?,?,?,?,?,?)",$param);
-        
+        if(isset($_POST['Pers_kods']) && !empty($_POST['Pers_kods'])){
+            $sifrets_lietotajs = md5('f^89#hJ!'.md5($lietotajs_Pers_kods));
+            $ierakstu_skaits=db::query("SELECT COUNT(Pers_kods) as 'Reg_skaits' FROM lietotaji
+            WHERE Pers_kods LIKE '".$sifrets_lietotajs."'");
+            foreach($ierakstu_skaits as $ieraksts){
+                $skaits = $ieraksts['Reg_skaits'];
+            }
+            //echo "<h1>".$skaits."</h1>";
+            if($skaits < 3){
+                db::query("INSERT INTO lietotaji (`Vards`, `Uzvards`, `Pers_kods`, `Stud_prog`, `CE_P1`, `CE_V1`, `CE_P2`, `CE_V2`, `Rangs`, `Vid`) VALUES(?,?,?,?,?,?,?,?,?,?)",$param);
+                echo '<h1> Veiksmīgi tiki reģistrēts kursam: '.$lietotajs_studiju_programma.'</h1>';
+            } else {
+                echo '<h1 style="color: red"> Tu jau esi reģisrējies maksimāli atļautās trīs reizes!</h1>';
+            }
+        }
     }
 
 echo '
@@ -331,6 +344,19 @@ echo '
         echo $lietotajs_Vards, $lietotajs_Uzvards, $lietotajs_Pers_kods, $lietotajs_studiju_programma, $lietotajs_CE_P1, $lietotajs_CE_V1, $lietotajs_CE_P2, $lietotajs_CE_P2, $lietotajs_rangs, $lietotajs_Vid;
     };
     */
+    if(isset($_POST["Pers_kods"]) && !empty($_POST["Pers_kods"])){
+        $sifrets_lietotajs = md5('f^89#hJ!'.md5($lietotajs_Pers_kods));
+        $ierakstu_skaits=db::query("SELECT COUNT(Pers_kods) as 'Reg_skaits' FROM lietotaji
+        WHERE Pers_kods LIKE '".$sifrets_lietotajs."'");
+        foreach($ierakstu_skaits as $ieraksts){
+            $skaits = $ieraksts['Reg_skaits'];
+        }
+        if($skaits <= 1){
+            echo '<br>
+            <h2>Tavs unikālais kods ir: '.$sifrets_lietotajs.'<h2>
+            <h3>Neaizmirsti šo kodu saglabāt</h3>';
+        }
+    };
     echo '
 </html>'; 
 ?>
