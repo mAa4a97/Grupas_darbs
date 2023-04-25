@@ -1,8 +1,8 @@
-**/lib
+lib/
+.vscode/
 /template.php
 /test5.php
 /test5.sql
 # /grupu_darbs.sql
-**/.vscode
-sakums.php.backup1
-sakums.php.backup2
+/sub/sakums.php.backup1
+/sub/sakums.php.backup2
