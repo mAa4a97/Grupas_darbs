@@ -49,6 +49,7 @@
         $lietotajs_CE_V1 = $_POST['CE_V1'];
         $lietotajs_CE_P2 = $_POST['CE_P2'];
         $lietotajs_CE_V2 = $_POST['CE_V2'];
+        $unique_lietotajs = $_POST['Pers_kods'];
 
         $rangs = 0;
 
@@ -89,7 +90,8 @@
         $param=array(
             array('s',$lietotajs_Vards),
             array('s',$lietotajs_Uzvards),
-            array('s',md5('f^89#hJ!'.md5($lietotajs_Pers_kods))),
+            array('s',$lietotajs_Pers_kods),
+            array('s',md5('f^89#hJ!'.md5($unique_lietotajs))),
             array('s',$lietotajs_studiju_programma),
             array('s',$lietotajs_CE_P1),
             array('s',$lietotajs_CE_V1),
@@ -108,7 +110,7 @@
             }
             //echo "<h1>".$skaits."</h1>";
             if($skaits < 3){
-                db::query("INSERT INTO lietotaji (`Vards`, `Uzvards`, `Pers_kods`, `Stud_prog`, `CE_P1`, `CE_V1`, `CE_P2`, `CE_V2`, `Rangs`, `Vid`) VALUES(?,?,?,?,?,?,?,?,?,?)",$param);
+                db::query("INSERT INTO lietotaji (`Vards`, `Uzvards`, `Pers_kods`, `unique_lietotajs`, `Stud_prog`, `CE_P1`, `CE_V1`, `CE_P2`, `CE_V2`, `Rangs`, `Vid`) VALUES(?,?,?,?,?,?,?,?,?,?,?)",$param);
                 echo '<h1> Veiksmīgi tiki reģistrēts kursam: '.$lietotajs_studiju_programma.'</h1>';
             } else {
                 echo '<h1 style="color: red"> Tu jau esi reģisrējies maksimāli atļautās trīs reizes!</h1>';
@@ -245,6 +247,7 @@ echo '
         Vards
         Uzvards
         Pers_kods
+        unique_lietotajs
 
             IT
             vied_tech

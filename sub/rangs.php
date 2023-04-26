@@ -22,7 +22,7 @@ $vieta = 1;
 
 // Te būs dropdown menu, kurā lietotājam jāizvēlas studiju programma, kādā viņš ir reģistrējies
 $select_menu=db::query("SELECT DISTINCT Stud_prog FROM lietotaji
-WHERE Pers_kods LIKE '".$_SESSION['id']."'");
+WHERE unique_lietotajs LIKE '".$_SESSION['id']."'");
 
 echo '
     <form action="" method="post">

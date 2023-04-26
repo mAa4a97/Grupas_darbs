@@ -15,13 +15,13 @@ $lietotaji=db::query("SELECT * FROM lietotaji");
 
 $pazinojums='';
 
-if(isset($_POST['Pers_kods'],$_POST['autorizeties'])){
+if(isset($_POST['unique_lietotajs'],$_POST['autorizeties'])){
 	foreach($lietotaji as $lietotajs){
 		//vai pareizi pieejas dati	
 		//if(md5('f^89#hJ!'.md5($_POST['Pers_kods']))==$lietotajs['Pers_kods']){
-		if($_POST['Pers_kods']==$lietotajs['Pers_kods']){
+		if($_POST['unique_lietotajs']==$lietotajs['unique_lietotajs']){
 			$_SESSION['autorizejies']=1;		
-			$_SESSION['id']=$lietotajs['Pers_kods'];			
+			$_SESSION['id']=$lietotajs['unique_lietotajs'];			
 			//setcookie('autorizejies',1,time()+60*60);
 			header("Location: sign_up_page.php");
 		}
