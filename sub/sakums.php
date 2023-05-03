@@ -103,8 +103,8 @@
         
         if(isset($_POST['Pers_kods']) && !empty($_POST['Pers_kods'])){
             $sifrets_lietotajs = md5('f^89#hJ!'.md5($lietotajs_Pers_kods));
-            $ierakstu_skaits=db::query("SELECT COUNT(Pers_kods) as 'Reg_skaits' FROM lietotaji
-            WHERE Pers_kods LIKE '".$sifrets_lietotajs."'");
+            $ierakstu_skaits=db::query("SELECT COUNT(unique_lietotajs) as 'Reg_skaits' FROM lietotaji
+            WHERE unique_lietotajs LIKE '".$sifrets_lietotajs."'");
             foreach($ierakstu_skaits as $ieraksts){
                 $skaits = $ieraksts['Reg_skaits'];
             }
@@ -348,9 +348,12 @@ echo '
     };
     */
     if(isset($_POST["Pers_kods"]) && !empty($_POST["Pers_kods"])){
-        $sifrets_lietotajs = md5('f^89#hJ!'.md5($lietotajs_Pers_kods));
+        /*$sifrets_lietotajs = md5('f^89#hJ!'.md5($lietotajs_Pers_kods));
         $ierakstu_skaits=db::query("SELECT COUNT(Pers_kods) as 'Reg_skaits' FROM lietotaji
-        WHERE Pers_kods LIKE '".$sifrets_lietotajs."'");
+        WHERE Pers_kods LIKE '".$sifrets_lietotajs."'");*/
+        $sifrets_lietotajs = md5('f^89#hJ!'.md5($lietotajs_Pers_kods));
+        $ierakstu_skaits=db::query("SELECT COUNT(unique_lietotajs) as 'Reg_skaits' FROM lietotaji
+        WHERE unique_lietotajs LIKE '".$sifrets_lietotajs."'");
         foreach($ierakstu_skaits as $ieraksts){
             $skaits = $ieraksts['Reg_skaits'];
         }

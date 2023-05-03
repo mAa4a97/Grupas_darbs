@@ -17,6 +17,15 @@ ORDER BY `lietotaji`.`Rangs` DESC, `lietotaji`.`Vid` DESC;
 
 !!!Skatities no .lib lietotaji.php ka piemeru!!!
 */
+
+// Izdrukājam lietotāja User ID aka Pers kodu
+$username_array = db::query("SELECT DISTINCT Pers_kods FROM lietotaji 
+WHERE unique_lietotajs LIKE '".$_SESSION['id']."'");
+foreach($username_array as $username){
+    echo '<p>Tavs lietotājvārds: <b>'.$username['Pers_kods'].'</b></p>';
+};
+echo '<br>';
+
 // Definējam jau iepriekš vietas indeksāciju
 $vieta = 1;
 
@@ -26,6 +35,7 @@ WHERE unique_lietotajs LIKE '".$_SESSION['id']."'");
 
 echo '
     <form action="" method="post">
+        Izvēlies studiju programmu: 
         <select name="studiju_programma_selection">';
         foreach($select_menu as $selection){
             echo'
@@ -33,7 +43,7 @@ echo '
         };
         echo '
         </select>
-        <button type="submit">Submit</button>;
+        <button type="submit">Parādīt</button>
     </form>
 ';
 
@@ -98,7 +108,7 @@ if(isset($_POST['studiju_programma_selection']) && !empty($_POST['studiju_progra
                     <th>Vieta</th>
                     <!--<th>Vārds</th>-->
                     <!--<th>Uzvārds</th>-->
-                    <th>Personas kods</th>
+                    <th>Lietotājvārds</th>
                     <th>Reģistrācijas datums</th>
                     <th>Studiju programma</th>
                     <th>Rangs</th>

@@ -15,11 +15,11 @@ $lietotaji=db::query("SELECT * FROM lietotaji");
 
 $pazinojums='';
 
-if(isset($_POST['unique_lietotajs'],$_POST['autorizeties'])){
+if(isset($_POST['unique_autorizeties'],$_POST['autorizeties'])){
 	foreach($lietotaji as $lietotajs){
 		//vai pareizi pieejas dati	
 		//if(md5('f^89#hJ!'.md5($_POST['Pers_kods']))==$lietotajs['Pers_kods']){
-		if($_POST['unique_lietotajs']==$lietotajs['unique_lietotajs']){
+		if($_POST['unique_autorizeties']==$lietotajs['unique_lietotajs']){
 			$_SESSION['autorizejies']=1;		
 			$_SESSION['id']=$lietotajs['unique_lietotajs'];			
 			//setcookie('autorizejies',1,time()+60*60);
@@ -39,6 +39,7 @@ else{
     define('LIETOTAJVARDS','');
 }
 
+//echo '<p>'.$_SESSION['id'].'</p>';
 $sadalas=db::query("SELECT * FROM sadalas");
 
 //---------------------------------------- Main Page
@@ -64,8 +65,8 @@ foreach($sadalas as $sadala){
 }
 echo'</p>';
 
-$select_menu=db::query("SELECT DISTINCT Pers_kods FROM lietotaji
-WHERE unique_lietotajs LIKE '".$_SESSION['id']."'");
+//$select_menu=db::query("SELECT DISTINCT unique_lietotajs FROM lietotaji
+//WHERE unique_lietotajs LIKE '".$_SESSION['id']."'");
 
 if(isset($_GET['sadala'])){
 	$atrasta_sadala=0;
