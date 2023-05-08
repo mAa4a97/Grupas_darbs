@@ -109,7 +109,7 @@
                 $skaits = $ieraksts['Reg_skaits'];
             }
             //echo "<h1>".$skaits."</h1>";
-            if($skaits < 3){
+            if($skaits <= 3){
                 db::query("INSERT INTO lietotaji (`Vards`, `Uzvards`, `Pers_kods`, `unique_lietotajs`, `Stud_prog`, `CE_P1`, `CE_V1`, `CE_P2`, `CE_V2`, `Rangs`, `Vid`) VALUES(?,?,?,?,?,?,?,?,?,?,?)",$param);
                 echo '<h1> Veiksmīgi tiki reģistrēts kursam: '.$lietotajs_studiju_programma.'</h1>';
             } else {
@@ -121,22 +121,28 @@
 echo '
 <!DOCTYPE HTML>
 <html>
+   <!-- <style>
+    * { 
+        outline: 1px solid red;
+        outline-offset: -1px;
+    }
+    </style>-->
     <head>
         <title>Reģistrācija kursiem</title>
         <link rel="stylesheet" type="text/css" href="/css/styles.css">
     </head>
-    <body>
-        <p>Reģistrēties studijām</p>
+    <body style="background-color:#D6EAF8;">
+        <h2 style="text-align: center; "><i>Reģistrēties studijām</i></h2>
         <br \>
-        <form action="" method="post">
-                Vārds: <input type="text" placeholder="Vārds" name="Vards">
+        <form action="" method="post" style="text-align: center;">
+                Vārds: <input type="text" style="text-align: center" placeholder="Vārds" name="Vards">
             <br />
-                Uzvārds: <input type="text" placeholder="Uzvārds" name="Uzvards">
+                Uzvārds: <input type="text" style="text-align: center" placeholder="Uzvārds" name="Uzvards">
             <br />
-                Personas kods: <input type="text" name="Pers_kods">
+                Personas kods: <input type="text" style="text-align: center" name="Pers_kods">
             <br />
                 <label for="studiju_programma">Studiju programma:</label>
-                <select id="studiju_programma" name="studiju_programma" onchange="updateOptions()">
+                <select style="text-align: center" id="studiju_programma" name="studiju_programma" onchange="updateOptions()">
                     <option value="">--Izvēlies studiju programmu--</option>
                     <optgroup label="Dabas un inženierzinātņu fakultāte">
                         <option value="IT">Informācijas tehnoloģijas</option>
@@ -164,13 +170,13 @@ echo '
             <br />
                 Centralizēto eksāmenu līmenis:
                 <br \>
-                    <select id="CE_P1" name="CE_P1">
+                    <select style="text-align: center" id="CE_P1" name="CE_P1">
                         <option value="math">Matemātika</option>
                         <option value="lang">Svešvaloda</option>
                         <option value="LV">Latviešu valoda</option>
                     </select>
                     <!--Priekšments-->
-                    <select id="CE_V1" name="CE_V1">
+                    <select style="text-align: center" id="CE_V1" name="CE_V1">
                         <option value="">Atzīmē CE #1 Līmeni</option>
                         <option value="F">F</option>
                         <option value="E">E</option>
@@ -184,13 +190,13 @@ echo '
                     -->
                     <!--līmenis-->
                 <br \>
-                    <select id="CE_P2" name="CE_P2">
+                    <select style="text-align: center" id="CE_P2" name="CE_P2">
                         <option value="math">Matemātika</option>
                         <option value="lang">Svešvaloda</option>
                         <option value="LV">Latviešu valoda</option>
                     </select>
                     <!--Priekšments-->
-                    <select id="CE_V2" name="CE_V2">
+                    <select style="text-align: center" id="CE_V2" name="CE_V2">
                         <option value="" name="">Atzīmē CE #2 Līmeni</option>
                         <option value="F">F</option>
                         <option value="E">E</option>
@@ -204,7 +210,7 @@ echo '
                     -->
                     <!--līmenis-->
             <br />
-                Vidējā atzīme beidzot vidusskolu: <input type="number" placeholder="Ievadi vidējo atzīmi" name="Vid" value="">
+                Vidējā atzīme beidzot vidusskolu: <input type="number" style="text-align: center" placeholder="Ievadi vidējo atzīmi" name="Vid" value="">
             <br />
             <input type="submit" name="Iesniegt" value="Iesniegt">
         </form>

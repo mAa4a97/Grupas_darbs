@@ -53,17 +53,17 @@ echo'
 
 
 
-echo'<p>';
+echo'<div style="display: flex; justify-content: space-evenly;">';
 foreach($sadalas as $sadala){
 	//divi nederīgi gadījumi, kad mēs sadaļu neizvadām.
 	if(($sadala['redzams']=='autorizetiem' && AUTORIZEJIES==0) || ($sadala['redzams']=='neautorizetiem' && AUTORIZEJIES==1)){
 		continue;
 	}
 	else{
-		echo'<a href="?sadala='.$sadala['adrese'].'">'.$sadala['nosaukums'].'</a> ';
+		echo'<a href="?sadala='.$sadala['adrese'].'" style="font-size: 20px; color: #17202A">'.$sadala['nosaukums'].'</a> ';
 	}
 }
-echo'</p>';
+echo'</div>';
 
 //$select_menu=db::query("SELECT DISTINCT unique_lietotajs FROM lietotaji
 //WHERE unique_lietotajs LIKE '".$_SESSION['id']."'");

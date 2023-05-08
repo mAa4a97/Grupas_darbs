@@ -19,12 +19,13 @@ ORDER BY `lietotaji`.`Rangs` DESC, `lietotaji`.`Vid` DESC;
 */
 
 // Izdrukājam lietotāja User ID aka Pers kodu
+echo '<body style="background-color:#D6EAF8;">';
 $username_array = db::query("SELECT DISTINCT Pers_kods FROM lietotaji 
 WHERE unique_lietotajs LIKE '".$_SESSION['id']."'");
 foreach($username_array as $username){
-    echo '<p>Tavs lietotājvārds: <b>'.$username['Pers_kods'].'</b></p>';
+    echo '<p style="text-align: center">Tavs lietotājvārds: <b>'.$username['Pers_kods'].'</b></p>';
 };
-echo '<br>';
+//echo '<br>';
 
 // Definējam jau iepriekš vietas indeksāciju
 $vieta = 1;
@@ -34,7 +35,7 @@ $select_menu=db::query("SELECT DISTINCT Stud_prog FROM lietotaji
 WHERE unique_lietotajs LIKE '".$_SESSION['id']."'");
 
 echo '
-    <form action="" method="post">
+    <form action="" method="post" style="text-align: center">
         Izvēlies studiju programmu: 
         <select name="studiju_programma_selection">';
         foreach($select_menu as $selection){
@@ -113,7 +114,7 @@ if(isset($_POST['studiju_programma_selection']) && !empty($_POST['studiju_progra
                     <th>Studiju programma</th>
                     <th>Rangs</th>
                     <th>Vidējā atzīme</th>
-                    <th>Budžetā?</th>
+                    <th>Budžeta/Maksas</th>
                 </tr>
             </thead>
             <tbody>';
@@ -134,10 +135,10 @@ if(isset($_POST['studiju_programma_selection']) && !empty($_POST['studiju_progra
                         <td>'.$lietotajs['Vid'].'</td>';
                         if(($budget_places - $vieta + 1) > 0){
                             echo
-                        '<td>Budžetā</td>';
+                        '<td>Budžeta</td>';
                         } else {
                             echo
-                        '<td>Nē</td>';
+                        '<td>Maksas</td>';
                         }
                     echo'
                     </tr>';
@@ -149,7 +150,7 @@ if(isset($_POST['studiju_programma_selection']) && !empty($_POST['studiju_progra
         <h3>Pieteikušies programmai: '.($vieta-1).'<br>
         Atlikušās budžeta vietas: ';
         if(($remaining = $budget_places - $vieta + 1) > 0){
-            echo $remaining;
+            echo $remaining.' no '.$budget_places;
         }	else {
             echo '0';
         }
@@ -159,4 +160,5 @@ if(isset($_POST['studiju_programma_selection']) && !empty($_POST['studiju_progra
         echo'<p>Lietotāju nav!</p>';
     }
 }
+echo '</body>';
 ?>
