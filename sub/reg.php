@@ -109,7 +109,7 @@
                 $skaits = $ieraksts['Reg_skaits'];
             }
             //echo "<h1>".$skaits."</h1>";
-            if($skaits <= 3){
+            if($skaits < 3){
                 db::query("INSERT INTO lietotaji (`Vards`, `Uzvards`, `Pers_kods`, `unique_lietotajs`, `Stud_prog`, `CE_P1`, `CE_V1`, `CE_P2`, `CE_V2`, `Rangs`, `Vid`) VALUES(?,?,?,?,?,?,?,?,?,?,?)",$param);
                 echo '<h1> Veiksmīgi tiki reģistrēts kursam: '.$lietotajs_studiju_programma.'</h1>';
             } else {
