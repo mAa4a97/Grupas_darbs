@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2023 at 01:34 PM
+-- Generation Time: May 11, 2023 at 01:39 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -66,8 +66,7 @@ INSERT INTO `lietotaji` (`id`, `date`, `Vards`, `Uzvards`, `Pers_kods`, `unique_
 (80, '2023-05-11', 'Konsantīns', 'Mežiņš', '7a903c955cbd6bb8645f7b2a99047ecb', '6858639b3f9bf525c852c5f208c50883', 'tour_vad', 'lang', 'A', 'math', 'B', 11, 7),
 (81, '2023-05-11', 'Madars', 'Vagalis', '67877ed73db0a0c5fb1cf88fb5321df9', '1594225129f3a65e1a05922a8719ae75', 'IT', 'lang', 'A', 'math', 'B', 11, 7),
 (82, '2023-05-11', 'Madars', 'Vagalis', '67877ed73db0a0c5fb1cf88fb5321df9', '1594225129f3a65e1a05922a8719ae75', 'vied_tech', 'LV', 'B', 'math', 'B', 10, 8),
-(83, '2023-05-11', 'Madars', 'Vagalis', '67877ed73db0a0c5fb1cf88fb5321df9', '1594225129f3a65e1a05922a8719ae75', 'sakumsk_skol', 'lang', 'D', 'LV', 'C', 7, 8),
-(84, '2023-05-11', 'Madars', 'Vagalis', '67877ed73db0a0c5fb1cf88fb5321df9', '1594225129f3a65e1a05922a8719ae75', 'baltu_val', 'lang', 'B', 'math', 'A', 11, 8);
+(83, '2023-05-11', 'Madars', 'Vagalis', '67877ed73db0a0c5fb1cf88fb5321df9', '1594225129f3a65e1a05922a8719ae75', 'sakumsk_skol', 'lang', 'D', 'LV', 'C', 7, 8);
 
 -- --------------------------------------------------------
 
